@@ -1,7 +1,7 @@
 package co.edu.unbosque.controller;
 
-import co.edu.ubosque.view.View;
 import co.edu.unbosque.model.MixComposer;
+import co.edu.unbosque.view.View;
 
 public class Controller {
 	

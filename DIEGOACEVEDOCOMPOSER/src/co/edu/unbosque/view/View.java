@@ -1,4 +1,4 @@
-package co.edu.ubosque.view;
+package co.edu.unbosque.view;
 
 import javax.swing.JOptionPane;
 

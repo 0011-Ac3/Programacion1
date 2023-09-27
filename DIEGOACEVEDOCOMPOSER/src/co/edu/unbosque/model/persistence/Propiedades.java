@@ -1,4 +1,4 @@
-package co.edu.ubosque.model.persistence;
+package co.edu.unbosque.model.persistence;
 
 import java.io.*;
 import java.util.Properties;

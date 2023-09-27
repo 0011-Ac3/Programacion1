@@ -1,8 +1,9 @@
 package co.edu.unbosque.model;
 
 import java.util.Random;
-import co.edu.ubosque.model.persistence.FileManager;
-import co.edu.ubosque.model.persistence.Propiedades;
+
+import co.edu.unbosque.model.persistence.FileManager;
+import co.edu.unbosque.model.persistence.Propiedades;
 
 public class MixComposer {
 	private FileManager fm;
