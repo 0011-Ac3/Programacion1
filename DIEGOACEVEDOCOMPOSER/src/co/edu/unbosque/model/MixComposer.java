@@ -14,6 +14,9 @@ public class MixComposer {
 	private String[] fr5 = {"hasta que salga el sol", "toda la noche", "hasta el amanecel", "todo el dia"};
 	private String[] fr6 = {"sin anestesia", "sin complomiso", "feis to feis", "sin miedo"};
 	
+	private int estrofas;
+	private int frasesPorEstrofa;
+	private String nombreDeLaCancion;
 	private String cancion;
 	
 	public MixComposer() {
@@ -41,14 +44,22 @@ public class MixComposer {
 			}
 			cancion += "\n";
 		}
+		setEstrofas(estrofas);
+		setFrasesPorEstrofa(frasesPorEstrofa);
+		setNombreDeLaCancion(nombreDeLaCancion);
 		setCancion(cancion);
 	}
 	
 	public String crearArchivoCancion() {
-		if (fm.escribirArchivo(cancion) == 0) {
-			return "Canción creada con éxito";
-		} else {
+		int valorRetorno = 0;
+		try {
+			valorRetorno = fm.escribirArchivo(cancion, getNombreDeLaCancion());
+			if (valorRetorno == 0) {
+				return "Canción creada con éxito";
+			}
 			return "Fallo en la creación de la canción";
+		} catch (NullPointerException e) {
+			return "No se ha especificado el número de estrofas y versos para la canción";
 		}
 	}
 	
@@ -58,12 +69,25 @@ public class MixComposer {
 	}
 	
 	public String seleccionarCancion() {
+		setCancion(null);
+		setEstrofas(0);
+		setFrasesPorEstrofa(0);
 		fm.getArchivo();
-		return fm.leerArchivo();
+		String cancion = "";
+		try {
+			cancion = fm.leerArchivo();
+		} catch (NullPointerException e) {
+			return "No se ha seleccionado ningún archivo";
+		}
+		return cancion;
 	}
 
 	public FileManager getFm() {
 		return fm;
+	}
+
+	public Propiedades getPropiedades() {
+		return propiedades;
 	}
 
 	public String[] getFr1() {
@@ -90,12 +114,24 @@ public class MixComposer {
 		return fr6;
 	}
 
+	public int getEstrofas() {
+		return estrofas;
+	}
+
+	public int getFrasesPorEstrofa() {
+		return frasesPorEstrofa;
+	}
+
 	public String getCancion() {
 		return cancion;
 	}
 
 	public void setFm(FileManager fm) {
 		this.fm = fm;
+	}
+
+	public void setPropiedades(Propiedades propiedades) {
+		this.propiedades = propiedades;
 	}
 
 	public void setFr1(String[] fr1) {
@@ -122,7 +158,23 @@ public class MixComposer {
 		this.fr6 = fr6;
 	}
 
+	public void setEstrofas(int estrofas) {
+		this.estrofas = estrofas;
+	}
+
+	public void setFrasesPorEstrofa(int frasesPorEstrofa) {
+		this.frasesPorEstrofa = frasesPorEstrofa;
+	}
+
 	public void setCancion(String cancion) {
 		this.cancion = cancion;
+	}
+	
+	public String getNombreDeLaCancion() {
+		return nombreDeLaCancion;
+	}
+	
+	public void setNombreDeLaCancion(String nombreDeLaCancion) {
+		this.nombreDeLaCancion = nombreDeLaCancion;
 	}
 }

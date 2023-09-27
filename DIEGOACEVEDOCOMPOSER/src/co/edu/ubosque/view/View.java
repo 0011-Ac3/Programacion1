@@ -13,7 +13,23 @@ public class View {
 	}
 	
 	public int pedirNumero(String msg) {
-		return Integer.parseInt(JOptionPane.showInputDialog(null, msg));
+		int numero = 0;
+		boolean salir = false;
+		while (!salir) {
+			String dato = JOptionPane.showInputDialog(null, msg);
+			if (dato == null) {
+				throw new NullPointerException();
+			}
+			if (!dato.equals("")) {
+				try {
+					numero = Integer.parseInt(dato);
+					salir = true;
+				} catch (NumberFormatException e) {
+					message("El dato ingresado no es válido");
+				}
+			}
+		}
+		return numero;
 	} 
 	
 	public int pedirOpcion() {
@@ -23,6 +39,17 @@ public class View {
 		opciones += "2) Crear canción\n";
 		opciones += "3) Seleccionar canción\n";
 		opciones += "4) Salir\n";
-		return pedirNumero(opciones);
+		
+		int numero = 0;
+		String dato = JOptionPane.showInputDialog(null, opciones);
+		if (dato == null) {
+			return 4;
+		}
+		try {
+			numero = Integer.parseInt(dato);
+		} catch (NumberFormatException e) {
+			return -1;
+		}
+		return numero;
 	}
 }

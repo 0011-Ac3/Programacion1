@@ -8,7 +8,8 @@ public class FileManager {
 	
 	private String rutaArchivo = "C:\\Data\\archivo.txt";
 	private JFileChooser chooser = new JFileChooser();
-	public int escribirArchivo(String mensaje) {
+	public int escribirArchivo(String mensaje, String nombreCancion) {
+		setRutaArchivo("C:\\\\Data\\\\" + nombreCancion + ".txt");
 		File f = new File(this.rutaArchivo);
 		
 		try {
@@ -52,6 +53,8 @@ public class FileManager {
 	public void getArchivo() {
 		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			setRutaArchivo(chooser.getSelectedFile().toString());
+		} else {
+			setRutaArchivo(null);
 		}
 	}
 

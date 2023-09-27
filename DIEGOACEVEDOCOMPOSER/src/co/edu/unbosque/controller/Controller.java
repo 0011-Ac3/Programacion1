@@ -14,14 +14,16 @@ public class Controller {
 		
 		boolean salir = false;
 		while (!salir) {
-			
-			switch (view.pedirOpcion()) {
+			int opcion = view.pedirOpcion();
+			switch (opcion) {
 				case 1:
-					int numeroDeEstrofas = view.pedirNumero("Digite el número de estrofas:");
-					int numeroDeVersos = view.pedirNumero("Digite el número de versos:");
-					String nombreDeLaCancion = view.pedirNombreCancion();
-					mc.construirCancion(numeroDeEstrofas, numeroDeVersos, nombreDeLaCancion);
-					mc.gestionarPropiedades(nombreDeLaCancion, numeroDeEstrofas, numeroDeVersos);
+					try {
+						int numeroDeEstrofas = view.pedirNumero("Digite el número de estrofas:");
+						int numeroDeVersos = view.pedirNumero("Digite el número de versos:");
+						String nombreDeLaCancion = view.pedirNombreCancion();
+						mc.construirCancion(numeroDeEstrofas, numeroDeVersos, nombreDeLaCancion);
+						mc.gestionarPropiedades(nombreDeLaCancion, numeroDeEstrofas, numeroDeVersos);
+					} catch (NullPointerException e) {}
 					break;
 				case 2: 
 					view.message(mc.crearArchivoCancion());
@@ -32,6 +34,8 @@ public class Controller {
 				case 4:
 					salir = true;
 					break;
+				default:
+					view.message("Opción inválida");
 			}
 		}
 	}
